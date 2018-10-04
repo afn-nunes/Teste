@@ -94,9 +94,9 @@ OutputDir=$(ALTDIROUTERPEXE)
 UnitOutputDir=$(ALTDIROUTERPDCU)
 PackageDLLOutputDir=
 PackageDCPOutputDir=
-SearchPath=C:\DSN\trunk\unitscompartilhadas;C:\DSN\trunk\unitscompartilhadas\geral;C:\DSN\trunk\unitscompartilhadas\estoque;C:\DSN\trunk\unitscompartilhadas\faturamento;C:\DSN\trunk\unitscompartilhadas\financeiro;C:\DSN\trunk\unitscompartilhadas\database;C:\DSN\trunk\unitscompartilhadas\template.crud;C:\DSN\trunk\unitscompartilhadas\cache
+SearchPath=C:\DSN\trunk\unitscompartilhadas;C:\DSN\trunk\unitscompartilhadas\geral;C:\DSN\trunk\unitscompartilhadas\estoque;C:\DSN\trunk\unitscompartilhadas\faturamento;C:\DSN\trunk\unitscompartilhadas\financeiro;C:\DSN\trunk\unitscompartilhadas\database;C:\DSN\trunk\unitscompartilhadas\template.crud;C:\DSN\trunk\unitscompartilhadas\cache;C:\DSN\trunk\lib\altliberp_login
 Packages=vcl;rtl;vclx;vclie;xmlrtl;inetdbbde;inet;inetdbxpress;dbrtl;soaprtl;dsnap;VclSmp;dbexpress;vcldb;dbxcds;inetdb;bdertl;vcldbx;adortl;teeui;teedb;tee;ibxpress;visualclx;visualdbclx;vclactnband;vclshlctrls;IntrawebDB_50_70;Intraweb_50_70;Rave50CLX;Rave50VCL;ABCDAD;ABC;ABCDB;ABCDBD;ABCDCL;ABCDIB;dac70;crcontrols70;cxLibraryVCLD7;cxPageControlVCLD7;dxdbtrD7;cxEditorsVCLD7;dxThemeD7;cxDataD7;cxExtEditorsVCLD7;dxmdsD7;dxorgcD7;dxComnD7;dxPSCoreD7;dxPScxCommonD7;dxPSLnksD7;dxPScxExtCommonD7;dxPScxGridLnkD7;cxGridVCLD7;dxPSTeeChartD7;dxPSdxOCLnkD7;cxTreeListVCLD7;dxtrmdD7;xtrafil;QR4RunD7;FlatStyle_D5;IBO40CRT_D7;IBO40FRT_D7;IBO40VRT_D7;IBO40TRT_D7;IBO40FTS_D7;IBO40WRT_D7;IBO40RPL_D7;IndyCore70;IndySystem70;IndyProtocols70;Ims2d7;Just1_d7;dclOfficeXP;rbDIDE97;rbDAD97;rbIDE97;rbRCL97;rbPDF97;rbCIDE97;rbBDE97;rbRIDE97;rbRAP97;rbUSERDesign97;rbUSER97;rbTDBC97;rxctl7;VCLZipD7_3;XFormat7;XDevice7;rxdb7;dxPSDBTeeChartD7;dxPSdxDBOCLnkD7;dxdborD7;cxExportVCLD7;rbDB97;AltLib_WMail;F157_R70;sdac70;dacvcl70;sdacvcl70
-Conditionals=
+Conditionals=EUREKALOG;EUREKALOG_VER6
 DebugSourceDirs=C:\DSN\trunk EST-9472 - NFe4\lib\altliberp_nfebinding\
 UsePackages=0
 [Parameters]
@@ -137,18 +137,22 @@ Comments=
 [HistoryLists\hlDebugSourcePath]
 Count=1
 Item0=C:\DSN\trunk EST-9472 - NFe4\lib\altliberp_nfebinding\
+[HistoryLists\hlConditionals]
+Count=1
+Item0=EUREKALOG;EUREKALOG_VER6
 [HistoryLists\hlUnitAliases]
 Count=1
 Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
 [HistoryLists\hlSearchPath]
-Count=7
-Item0=C:\DSN\trunk\unitscompartilhadas;C:\DSN\trunk\unitscompartilhadas\geral;C:\DSN\trunk\unitscompartilhadas\estoque;C:\DSN\trunk\unitscompartilhadas\faturamento;C:\DSN\trunk\unitscompartilhadas\financeiro;C:\DSN\trunk\unitscompartilhadas\database;C:\DSN\trunk\unitscompartilhadas\template.crud;C:\DSN\trunk\unitscompartilhadas\cache
-Item1=C:\DSN\trunk\unitscompartilhadas;C:\DSN\trunk\unitscompartilhadas\geral;C:\DSN\trunk\unitscompartilhadas\estoque;C:\DSN\trunk\unitscompartilhadas\faturamento;C:\DSN\trunk\unitscompartilhadas\financeiro;C:\DSN\trunk\unitscompartilhadas\database;C:\DSN\trunk\unitscompartilhadas\template.crud
-Item2=C:\DSN\trunk\unitscompartilhadas;C:\DSN\trunk\unitscompartilhadas\geral;C:\DSN\trunk\unitscompartilhadas\estoque;C:\DSN\trunk\unitscompartilhadas\faturamento;C:\DSN\trunk\unitscompartilhadas\financeiro;C:\DSN\trunk\unitscompartilhadas\database
-Item3=C:\DSN\trunk\unitscompartilhadas;C:\DSN\trunk\unitscompartilhadas\geral;C:\DSN\trunk\unitscompartilhadas\estoque;C:\DSN\trunk\unitscompartilhadas\faturamento;C:\DSN\trunk\unitscompartilhadas\financeiro
-Item4=C:\DSN\trunk\unitscompartilhadas;C:\DSN\trunk\unitscompartilhadas\geral;C:\DSN\trunk\unitscompartilhadas\estoque
-Item5=C:\DSN\trunk\unitscompartilhadas;C:\DSN\trunk\unitscompartilhadas\geral
-Item6=C:\DSN\trunk\unitscompartilhadas
+Count=8
+Item0=C:\DSN\trunk\unitscompartilhadas;C:\DSN\trunk\unitscompartilhadas\geral;C:\DSN\trunk\unitscompartilhadas\estoque;C:\DSN\trunk\unitscompartilhadas\faturamento;C:\DSN\trunk\unitscompartilhadas\financeiro;C:\DSN\trunk\unitscompartilhadas\database;C:\DSN\trunk\unitscompartilhadas\template.crud;C:\DSN\trunk\unitscompartilhadas\cache;C:\DSN\trunk\lib\altliberp_login
+Item1=C:\DSN\trunk\unitscompartilhadas;C:\DSN\trunk\unitscompartilhadas\geral;C:\DSN\trunk\unitscompartilhadas\estoque;C:\DSN\trunk\unitscompartilhadas\faturamento;C:\DSN\trunk\unitscompartilhadas\financeiro;C:\DSN\trunk\unitscompartilhadas\database;C:\DSN\trunk\unitscompartilhadas\template.crud;C:\DSN\trunk\unitscompartilhadas\cache
+Item2=C:\DSN\trunk\unitscompartilhadas;C:\DSN\trunk\unitscompartilhadas\geral;C:\DSN\trunk\unitscompartilhadas\estoque;C:\DSN\trunk\unitscompartilhadas\faturamento;C:\DSN\trunk\unitscompartilhadas\financeiro;C:\DSN\trunk\unitscompartilhadas\database;C:\DSN\trunk\unitscompartilhadas\template.crud
+Item3=C:\DSN\trunk\unitscompartilhadas;C:\DSN\trunk\unitscompartilhadas\geral;C:\DSN\trunk\unitscompartilhadas\estoque;C:\DSN\trunk\unitscompartilhadas\faturamento;C:\DSN\trunk\unitscompartilhadas\financeiro;C:\DSN\trunk\unitscompartilhadas\database
+Item4=C:\DSN\trunk\unitscompartilhadas;C:\DSN\trunk\unitscompartilhadas\geral;C:\DSN\trunk\unitscompartilhadas\estoque;C:\DSN\trunk\unitscompartilhadas\faturamento;C:\DSN\trunk\unitscompartilhadas\financeiro
+Item5=C:\DSN\trunk\unitscompartilhadas;C:\DSN\trunk\unitscompartilhadas\geral;C:\DSN\trunk\unitscompartilhadas\estoque
+Item6=C:\DSN\trunk\unitscompartilhadas;C:\DSN\trunk\unitscompartilhadas\geral
+Item7=C:\DSN\trunk\unitscompartilhadas
 [HistoryLists\hlUnitOutputDirectory]
 Count=1
 Item0=$(ALTDIROUTERPDCU)
@@ -157,7 +161,7 @@ Count=1
 Item0=$(ALTDIROUTERPEXE)
 [Exception Log]
 EurekaLog Version=6009
-Activate=0
+Activate=1
 Activate Handle=1
 Save Log File=1
 Foreground Tab=0
@@ -635,6 +639,6 @@ Count mtException_AntiFreeze=1
 mtException_AntiFreeze0="The application seems to be frozen."
 Count mtInvalidEmailMsg=1
 mtInvalidEmailMsg0="Invalid email."
-TextsCollection=English
+TextsCollection=
 
 

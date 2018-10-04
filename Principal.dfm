@@ -28,10 +28,36 @@ object Form1: TForm1
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <>
       DataController.Summary.SummaryGroups = <>
+      object cxGrid1DBTableView1nmarquivo: TcxGridDBColumn
+        DataBinding.FieldName = 'nmarquivo'
+      end
+      object cxGrid1DBTableView1NrUltimaVersao: TcxGridDBColumn
+        DataBinding.FieldName = 'NrUltimaVersao'
+      end
+      object cxGrid1DBTableView1ArquivoVersao: TcxGridDBColumn
+        DataBinding.FieldName = 'ArquivoVersao'
+      end
+      object cxGrid1DBTableView1versaoDisponivel: TcxGridDBColumn
+        DataBinding.FieldName = 'versaoDisponivel'
+      end
+      object cxGrid1DBTableView1StAtualizado: TcxGridDBColumn
+        DataBinding.FieldName = 'StAtualizado'
+      end
+      object cxGrid1DBTableView1Selecionar: TcxGridDBColumn
+        DataBinding.FieldName = 'Selecionar'
+        Width = 53
+      end
     end
     object cxGrid1Level1: TcxGridLevel
       GridView = cxGrid1DBTableView1
     end
+  end
+  object edtDiretorio: TEdit
+    Left = 455
+    Top = 54
+    Width = 416
+    Height = 21
+    TabOrder = 5
   end
   object dxBarManager1: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -50,8 +76,8 @@ object Form1: TForm1
     ImageOptions.LargeImages = ImagensRepositorio24x24.List
     PopupMenuLinks = <>
     UseSystemFont = True
-    Left = 83
-    Top = 170
+    Left = 11
+    Top = 517
     DockControlHeights = (
       0
       0
@@ -193,16 +219,17 @@ object Form1: TForm1
     end
   end
   object dspVersao: TDataSetProvider
-    Left = 112
-    Top = 88
+    DataSet = qrySistema
+    Left = 61
+    Top = 109
   end
   object cdsVersao: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'nmArquivo'
     Params = <>
     ProviderName = 'dspVersao'
-    Left = 68
-    Top = 89
+    Left = 116
+    Top = 129
     object cdsVersaonmarquivo: TStringField
       DisplayLabel = 'Nome do arquivo'
       DisplayWidth = 50
@@ -247,14 +274,25 @@ object Form1: TForm1
       FieldName = 'Selecionar'
     end
   end
-  object dsVersao: TDataSource
-    DataSet = cdsVersao
-    Left = 168
-    Top = 88
-  end
-  object qryAtualizaNrUltimaVersao: TUniQuery
+  object qrySistema: TUniQuery
     Connection = dtmConnection.mscConnectionERP
-    Left = 50
-    Top = 131
+    SQL.Strings = (
+      'Select nmSistema, nmArquivo, nrUltimaVersao from Sistema')
+    Active = True
+    Left = 13
+    Top = 107
+  end
+  object qryConfiguracao: TUniQuery
+    SQL.Strings = (
+      
+        'Select vlConfiguracao from Configuracao where nmSecao = '#39'DataBas' +
+        'e'#39' and nmConfiguracao = '#39'DiretorioAtualizacao'#39)
+    Left = 69
+    Top = 157
+  end
+  object dsVersao: TUniDataSource
+    DataSet = cdsVersao
+    Left = 24
+    Top = 161
   end
 end

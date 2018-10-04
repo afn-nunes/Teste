@@ -11,7 +11,7 @@ uses
   cxEdit, cxNavigator, DB, cxDBData, dxSkinsdxBarPainter, dxBar, cxClasses,
   cxGridLevel, cxGridCustomView, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxGrid,cxImage,
-  cxBarEditItem, DBClient, Provider;
+  cxBarEditItem, DBClient, Provider, MemDS, DBAccess, Uni, StdCtrls;
 
 type
   TForm1 = class(TForm)
@@ -37,13 +37,23 @@ type
     cdsVersaoversaoDisponivel: TStringField;
     cdsVersaoStAtualizado: TStringField;
     cdsVersaoSelecionar: TBooleanField;
-    dsVersao: TDataSource;
+    qrySistema: TUniQuery;
+    edtDiretorio: TEdit;
+    qryConfiguracao: TUniQuery;
+    cxGrid1DBTableView1nmarquivo: TcxGridDBColumn;
+    cxGrid1DBTableView1NrUltimaVersao: TcxGridDBColumn;
+    cxGrid1DBTableView1ArquivoVersao: TcxGridDBColumn;
+    cxGrid1DBTableView1versaoDisponivel: TcxGridDBColumn;
+    cxGrid1DBTableView1StAtualizado: TcxGridDBColumn;
+    cxGrid1DBTableView1Selecionar: TcxGridDBColumn;
+    dsVersao: TUniDataSource;
     procedure FormCreate(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure btnAbrirClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnLocalizarClick(Sender: TObject);
   private
+    Connection: TdtmConnection;
     qtAtualizados,
     qtDesatualizados: Integer;
     procedure preencherGridVersaoArquivo;
@@ -51,6 +61,10 @@ type
       Lista: TStringList);
     function TemAtributo(Attr, Val: Integer): Boolean;
     function VersaoExe(arquivo: string): String;
+    function RetornaDiretorioAtualizacao: string;
+    procedure PreencherVersaoDoArquivo(nomeAplicativo: string;
+      lista: Tstringlist; coluna: TStringField);
+    function VersaoComMascara(versao: string): string;
 
     { Private declarations }
   public
@@ -67,13 +81,9 @@ implementation
 {$R *.dfm}
 
 procedure TForm1.FormCreate(Sender: TObject);
-var
-  Connection: TdtmConnection;
 begin
-  Connection := TdtmConnection.Create(nil);
-  //edtDiretorio.Text:= 'C:\Program Files (x86)\Alterdata\ERP';
   FCadastroUsuariosSQL:= TUsuariosERP.create();
-  FCadastroUsuariosSQL.Connection:= Connection.mscConnectionERP;
+  FCadastroUsuariosSQL.Connection:= dtmConnection.mscConnectionERP;
 
   FLogin := false;
 
@@ -83,9 +93,10 @@ begin
 
     dtmERP.ConnectERPServer(ttlTerminar);
     cdsVersao.Open();
-    PreencherGridVersaoArquivo();
     inherited;
+    PreencherGridVersaoArquivo();
   end;
+
 end;
 
 procedure TForm1.btnNovoClick(Sender: TObject);
@@ -125,11 +136,34 @@ var
 begin
   qtAtualizados:= 0;
   qtDesatualizados:= 0;
-  cxGrid1DBTableView1.DataController.datasource.DataSet:= nil;
+  cxGrid1DBTableView1.DataController.datasource.DataSet.DisableControls();
   listaVersaoArquivo:= TStringList.Create();
   listaVersaoDisponivel:= TStringList.Create();
-  //ListarArquivos(edtDiretorio.Text,false,listaVersaoArquivo);
-  //ListarArquivos(RetornaDiretorioAtualizacao(),false,listaVersaoDisponivel);
+  ListarArquivos(edtDiretorio.Text,false,listaVersaoArquivo);
+  ListarArquivos(RetornaDiretorioAtualizacao(),false,listaVersaoDisponivel);
+  cdsVersao.Refresh();
+  cdsVersao.First();
+  try
+    while not cdsVersao.Eof do
+      begin
+        cdsVersao.Edit();
+        arquivo:= cdsVersaonmarquivo.AsString;
+        coluna:= cdsVersaoArquivoVersao;
+        PreencherVersaoDoArquivo(arquivo,listaVersaoArquivo,coluna);
+        coluna:= cdsVersaoversaoDisponivel;
+        PreencherVersaoDoArquivo(arquivo,listaVersaoDisponivel,coluna);
+        nrVersaoSistema:= cdsVersaoNrUltimaVersao.AsString;
+        nrVersaoArquivo:= cdsVersaoArquivoVersao.AsString;
+        //preencherLabelQtAtualizada(nrVersaoSistema,nrVersaoArquivo);
+        cdsVersao.Post();
+        cdsVersao.Next;
+      end;
+  finally
+    listaVersaoArquivo.Free();
+    listaVersaoDisponivel.Free;
+    cdsVersao.First();
+    cxGrid1DBTableView1.DataController.datasource.DataSet.EnableControls();
+  end;
 end;
 
 procedure TForm1.ListarArquivos(Diretorio: string; Sub:Boolean;Lista: TStringList);
@@ -205,4 +239,59 @@ begin
   StrDispose(Parquivo);
 end;
 
+function TForm1.RetornaDiretorioAtualizacao(): string;
+begin
+  qryConfiguracao.Connection:= dtmConnection.mscConnectionERP;
+  qryConfiguracao.Close();
+  qryConfiguracao.open();
+  result:= qryConfiguracao.FieldByName('vlConfiguracao').text;
+end;
+
+procedure TForm1.PreencherVersaoDoArquivo(nomeAplicativo: string; lista: Tstringlist; coluna: TStringField);
+var
+  horizontal: TStringList;
+  i:Integer;
+begin
+  horizontal:= TStringList.Create;
+  horizontal.Delimiter:= '|';
+  try
+   for I := 0 to Lista.Count - 1 do
+      begin
+        horizontal.DelimitedText:= lista[i];
+          if (nomeAplicativo = horizontal.Strings[0]) then
+             begin
+               coluna.AsString := VersaoComMascara(horizontal.Strings[1]);
+             end;
+      end;
+  finally
+    horizontal.Free();
+  end;
+end;
+
+function TForm1.VersaoComMascara(versao: string): string;
+var
+  lista: TStringList;
+  a,b,c,d: string;
+begin
+  lista:= TStringList.Create;
+  lista.Delimiter:= '.';
+  try
+    if ( not(versao = null) ) or (not(versao = ''))  then
+      begin
+        lista.DelimitedText:= versao;
+        if lista.Count > 3 then
+          begin
+            a:= lista[0];
+            b:= FormatFloat('00',StrToInt(lista[1]));
+            c:= FormatFloat('00',StrToInt(lista[2]));
+            d:= FormatFloat('00',StrToInt(lista[3]));
+          end;
+        result:= (a +'.'+ b +'.'+ c +'.'+ d);
+      end
+    else
+      result:= '-';
+  finally
+    lista.Free;
+  end;
+end;
 end.
