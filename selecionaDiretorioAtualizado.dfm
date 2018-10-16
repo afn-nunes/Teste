@@ -1,16 +1,14 @@
-object frmAtualizadorDeVersoes: TfrmAtualizadorDeVersoes
-  Left = 14
-  Top = 22
-  HelpContext = 702
-  BorderStyle = bsSingle
-  Caption = 'Atualizador de vers'#245'es'
-  ClientHeight = 702
-  ClientWidth = 1366
+object frmDiretorio: TfrmDiretorio
+  Left = 731
+  Top = 172
+  Width = 480
+  Height = 146
+  Caption = 'Sele'#231#227'o diret'#243'rio'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
-  Font.Name = 'MS Sans Serif'
+  Font.Name = 'Tahoma'
   Font.Style = []
   Icon.Data = {
     0000010006000000000001002000282004006600000040400000010020002842
@@ -9542,511 +9540,194 @@ object frmAtualizadorDeVersoes: TfrmAtualizadorDeVersoes
     000000C0000000C000000080000000000000000000003C010000380000001000
     0000000000000401000000000000C0000000C0890000}
   OldCreateOrder = False
-  Position = poScreenCenter
-  WindowState = wsMaximized
-  OnCreate = FormCreate
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object Panel1: TPanel
-    Left = 0
-    Top = 87
-    Width = 1366
+  object Label1: TLabel
+    Left = 16
+    Top = 21
+    Width = 312
+    Height = 13
+    Caption = 'Selecione o Diretorio onde se encontram os arquivos atualizados:'
+  end
+  object btnSelecaoDiretorio: TSpeedButton
+    Left = 416
+    Top = 40
+    Width = 33
     Height = 21
-    Align = alTop
-    BevelOuter = bvNone
-    Color = 7433063
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindow
-    Font.Height = -12
-    Font.Name = 'MS Sans Serif'
-    Font.Style = [fsBold]
-    ParentFont = False
-    TabOrder = 1
-    object ckMarcarTodos: TCheckBox
-      Left = 1282
-      Top = 4
-      Width = 17
-      Height = 17
-      BiDiMode = bdLeftToRight
-      Color = 7433063
-      ParentBiDiMode = False
-      ParentColor = False
-      TabOrder = 0
-      OnClick = ckMarcarTodosClick
-    end
-    object lbMarcar: TcxLabel
-      Left = 1192
-      Top = 3
-      Caption = 'Marcar Todos'
-      ParentColor = False
-      ParentFont = False
-      Style.Color = 7433063
-      Style.Font.Charset = ANSI_CHARSET
-      Style.Font.Color = clWindowText
-      Style.Font.Height = -12
-      Style.Font.Name = 'Segoe UI'
-      Style.Font.Style = []
-      Style.TextColor = clWindow
-      Style.IsFontAssigned = True
-      Properties.Alignment.Horz = taCenter
-      Properties.Alignment.Vert = taVCenter
-      AnchorX = 1231
-      AnchorY = 13
-    end
+    Flat = True
+    Glyph.Data = {
+      4A0D0000424D4A0D00000000000036000000280000001F0000001B0000000100
+      200000000000140D000000000000000000000000000000000000F1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFD7B1
+      6CFFC89E4DFFC89E4DFFC89E4DFFC89E4DFFC89E4DFFC89E4DFFC89E4DFFC89E
+      4DFFC89E4DFFC89E4DFFC89E4DFFC89E4DFFC89E4DFFC89E4DFFC89E4DFFC89E
+      4DFFC89E4DFFC89E4DFFD3AB61FFEFE7DCFFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFEFEAE4FFD9B26BFFCBA0
+      4DFFCBA04DFFCBA04DFFCBA04DFFCBA04DFFCBA04DFFCBA04DFFCBA04DFFCBA0
+      4DFFCBA04DFFCBA04DFFCBA04DFFCBA04DFFCBA04DFFCBA04DFFCBA04DFFCBA0
+      4DFFCBA04DFFD7B067FFEDE1CCFFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EAE2FFD9B268FFCEA24DFFCEA2
+      4DFFCEA24DFFCEA24DFFCEA24DFFCEA24DFFCEA24DFFCEA24DFFCEA24DFFCEA2
+      4DFFCEA24DFFCEA24DFFCEA24DFFCEA24DFFCEA24DFFCEA24DFFCEA24DFFCEA2
+      4DFFD9B166FFEDDFCAFFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFEEE4D7FFD9B162FFD2A54DFFD2A54DFFD2A5
+      4DFFD2A54DFFD2A54DFFD2A54DFFD2A54DFFD2A54DFFD2A54DFFD2A54DFFD2A5
+      4DFFD2A54DFFD2A54DFFD2A54DFFD2A54DFFD2A54DFFD2A54DFFD2A54DFFD9B0
+      62FFECDCC3FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFECE0CBFFD9AE5BFFD5A74DFFD5A74DFFD5A74DFFD5A7
+      4DFFD5A74DFFD5A74DFFD5A74DFFD5A74DFFD5A74DFFD5A74DFFD5A74DFFD5A7
+      4DFFD5A74DFFD5A74DFFD5A74DFFD5A74DFFD5A74DFFD5A74DFFD9AF5BFFEAD7
+      B8FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFEBD9BAFFD9AB50FFD9A94DFFD9A94DFFD9A94DFFD9A94DFFD9A9
+      4DFFD9A94DFFD9A94DFFD9A94DFFD9A94DFFD9A94DFFD9A94DFFD9A94DFFD9A9
+      4DFFD9A94DFFD9A94DFFD9A94DFFD9A94DFFD9A94DFFDAAC54FFE8D2ABFFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFE5C895FFDCAB4DFFDCAB4DFFDCAB4DFFDCAB4DFFDCAB4DFFDCAB4DFFDCAB
+      4DFFDCAB4DFFDCAB4DFFDCAB4DFFDCAB4DFFDCAB4DFFDCAB4DFFDCAB4DFFDCAB
+      4DFFDCAB4DFFDCAB4DFFDCAB4DFFDCAB4DFFDCAB4DFFE4C792FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFDFB6
+      68FFE0AE4DFFE0AE4DFFE0AE4DFFE0AE4DFFE0AE4DFFE0AE4DFFE0AE4DFFE0AE
+      4DFFE0AE4DFFE0AE4DFFE0AE4DFFE0AE4DFFE0AE4DFFE0AE4DFFE0AE4DFFE0AE
+      4DFFE0AE4DFFE0AE4DFFE0AE4DFFE0AE4DFFDFB76DFFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF0E9DFFFE4B65DFFE3B0
+      4DFFE3B04DFFE3B04DFFE3B04DFFE3B04DFFE3B04DFFE3B04DFFE3B04DFFE3B0
+      4DFFE3B04DFFE3B04DFFE3B04DFFE3B04DFFE3B04DFFE3B04DFFE3B04DFFE3B0
+      4DFFE3B04DFFE3B04DFFE3B04DFFE4B966FFEFE8DEFFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFEAD9BBFFE7B24DFFE7B24DFFE7B2
+      4DFFE7B24DFFE7B24DFFE7B24DFFE7B24DFFE7B24DFFE7B24DFFE7B24DFFE7B2
+      4DFFE7B24DFFE7B24DFFE7B24DFFE7B24DFFE7B24DFFE7B24DFFE7B24DFFE7B2
+      4DFFE7B24DFFE7B24DFFE7B453FFEAD9BBFFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFE4C792FFE9B44DFFE9B44DFFE9B44DFFE9B4
+      4DFFE9B44DFFE9B44DFFE9B44DFFE9B44DFFE9B44DFFE9B44DFFE9B44DFFE9B4
+      4DFFE9B44DFFE9B44DFFE9B44DFFE9B44DFFE9B44DFFE9B44DFFE9B44DFFE9B4
+      4DFFE9B44DFFE9B44DFFE5C896FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFE1BD7FFFE6C589FFE6C589FFE6C589FFE6C589FFE6C5
+      89FFE6C589FFE6C589FFE6C589FFE6C589FFE6C589FFE6C589FFE6C589FFE6C5
+      89FFE6C589FFE6C589FFE6C589FFE6C589FFE6C589FFE6C589FFE6C589FFE6C5
+      89FFE6C589FFE1BD7FFFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF0EAE2FFEEE7DBFFCA9734FFFBF7EEFFFCF8F0FFFCF8F0FFFCF8
+      F0FFFCF8F0FFFCF8F0FFFCF8F0FFFCF8F0FFFCF8F0FFFCF8F0FFFCF8F0FFFCF8
+      F0FFFCF8F0FFFCF8F0FFFCF8F0FFFCF8F0FFFCF8F0FFFBF7EFFFCCA354FFEEE7
+      DBFFF0EAE2FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFCA9734FFFEFCFAFFFEFEFCFFFEFEFCFFFEFEFCFFFEFE
+      FCFFFEFEFCFFFEFEFCFFFEFEFCFFFEFEFCFFFEFEFCFFFEFEFCFFFEFEFCFFFEFE
+      FCFFFEFEFCFFFEFEFCFFFEFEFCFFFEFEFCFFFEFCFAFFCDA14DFFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFCA9837FFD2A54DFFD2A54DFFD2A54DFFD2A54DFFD2A54DFFD2A5
+      4DFFD2A54DFFD2A54DFFD2A54DFFD2A54DFFD2A54DFFD2A54DFFD2A54DFFD2A5
+      4DFFD2A54DFFD2A54DFFD2A54DFFD2A54DFFD2A54DFFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFCF9A34FFD6A84DFFD6A84DFFD6A84DFFD6A84DFFD6A84DFFD6A84DFFD6A8
+      4DFFD6A84DFFD6A84DFFD6A84DFFD6A84DFFD6A84DFFD6A84DFFD6A84DFFD6A8
+      4DFFD6A84DFFD6A84DFFD6A84DFFD09C3BFFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFD49D
+      34FFDBAA4DFFDBAA4DFFDBAA4DFFDBAA4DFFDBAA4DFFDBAA4DFFDBAA4DFFDBAA
+      4DFFE6CFA6FFEDE3D2FFEDE3D2FFEDE3D2FFEDE3D2FFEDE3D2FFEDE3D2FFEDE3
+      D2FFEDE3D2FFEDE3D2FFEFE7DDFFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFDFAD4DFFDFAD
+      4DFFDFAD4DFFDFAD4DFFDFAD4DFFDFAD4DFFDFAD4DFFDFAD4DFFDCAC4FFFF1EC
+      E7FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFDDA434FFE4B14DFFE4B1
+      4DFFE4B14DFFE4B14DFFE4B14DFFE4B14DFFDEA941FFEBDAB8FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1EDE9FFF1ED
+      E9FFF1EDE9FFF1EDE9FFF1EDE9FF}
+    OnClick = btnSelecaoDiretorioClick
   end
-  object cxGrid1: TcxGrid
-    Left = 0
-    Top = 108
-    Width = 1366
-    Height = 594
-    Align = alClient
-    BevelKind = bkSoft
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
+  object edtDiretorio: TEdit
+    Left = 16
+    Top = 40
+    Width = 394
+    Height = 21
     TabOrder = 0
-    LevelTabs.CaptionAlignment = taLeftJustify
-    LevelTabs.Style = 11
-    LockedStateImageOptions.Text = 'Por favor aguarde...'
-    object cxGrid1DBTableView1: TcxGridDBTableView
-      OnDblClick = cxGrid1DBTableView1DblClick
-      Navigator.Buttons.CustomButtons = <>
-      Navigator.InfoPanel.Visible = True
-      DataController.DataSource = dsVersao
-      DataController.Summary.DefaultGroupSummaryItems = <>
-      DataController.Summary.FooterSummaryItems = <
-        item
-          Kind = skCount
-          FieldName = 'Selecionar'
-          Column = cxGrid1DBTableView1Selecionar
-          Sorted = True
-        end>
-      DataController.Summary.SummaryGroups = <>
-      OptionsData.Deleting = False
-      OptionsData.DeletingConfirmation = False
-      OptionsData.Editing = False
-      OptionsData.Inserting = False
-      OptionsSelection.CellSelect = False
-      OptionsView.NoDataToDisplayInfoText = '<N'#227'o existem dados para visualizar>'
-      OptionsView.ColumnAutoWidth = True
-      OptionsView.DataRowHeight = 25
-      OptionsView.Footer = True
-      OptionsView.FooterAutoHeight = True
-      OptionsView.FooterMultiSummaries = True
-      OptionsView.GridLines = glVertical
-      OptionsView.GroupFooters = gfVisibleWhenExpanded
-      OptionsView.HeaderHeight = 25
-      object cxGrid1DBTableView1nmarquivo: TcxGridDBColumn
-        DataBinding.FieldName = 'nmarquivo'
-        Options.GroupFooters = False
-      end
-      object cxGrid1DBTableView1NrUltimaVersao: TcxGridDBColumn
-        DataBinding.FieldName = 'NrUltimaVersao'
-        HeaderAlignmentHorz = taCenter
-      end
-      object cxGrid1DBTableView1ArquivoVersao: TcxGridDBColumn
-        DataBinding.FieldName = 'ArquivoVersao'
-        HeaderAlignmentHorz = taCenter
-      end
-      object cxGrid1DBTableView1versaoDisponivel: TcxGridDBColumn
-        DataBinding.FieldName = 'versaoDisponivel'
-        HeaderAlignmentHorz = taCenter
-      end
-      object cxGrid1DBTableView1StAtualizado: TcxGridDBColumn
-        DataBinding.FieldName = 'StAtualizado'
-        HeaderAlignmentHorz = taCenter
-        Width = 76
-      end
-      object cxGrid1DBTableView1Selecionar: TcxGridDBColumn
-        DataBinding.FieldName = 'Selecionar'
-        FooterAlignmentHorz = taCenter
-        HeaderAlignmentHorz = taCenter
-        Options.FilteringPopupMultiSelect = False
-        Options.GroupFooters = False
-        Options.Grouping = False
-        Options.Moving = False
-        Options.SortByDisplayText = isbtOn
-        Width = 70
-      end
-    end
-    object cxGrid1Level1: TcxGridLevel
-      GridView = cxGrid1DBTableView1
-    end
   end
-  object Panel2: TPanel
-    Left = 0
-    Top = 53
-    Width = 1366
-    Height = 34
-    Align = alTop
-    TabOrder = 6
-    object edtDiretorio: TcxTextEdit
-      Left = 97
-      Top = 5
-      ParentFont = False
-      Properties.AutoSelect = False
-      Properties.HideSelection = False
-      Properties.ReadOnly = True
-      Style.BorderStyle = ebsNone
-      Style.Color = clMenu
-      Style.Font.Charset = ANSI_CHARSET
-      Style.Font.Color = clBlack
-      Style.Font.Height = -12
-      Style.Font.Name = 'Segoe UI'
-      Style.Font.Style = []
-      Style.TextColor = clBlack
-      Style.IsFontAssigned = True
-      StyleFocused.BorderStyle = ebsNone
-      StyleFocused.TextColor = clBlack
-      TabOrder = 0
-      Width = 450
-    end
-    object edtDiretorioAtualizacao: TcxTextEdit
-      Left = 708
-      Top = 5
-      ParentFont = False
-      Properties.AutoSelect = False
-      Properties.HideSelection = False
-      Properties.ReadOnly = True
-      Style.BorderStyle = ebsNone
-      Style.Color = clMenu
-      Style.Font.Charset = ANSI_CHARSET
-      Style.Font.Color = clBlack
-      Style.Font.Height = -12
-      Style.Font.Name = 'Segoe UI'
-      Style.Font.Style = []
-      Style.TextColor = clBlack
-      Style.IsFontAssigned = True
-      StyleFocused.BorderStyle = ebsNone
-      StyleFocused.TextColor = clBlack
-      TabOrder = 1
-      Width = 450
-    end
-    object cxLabel1: TcxLabel
-      Left = 6
-      Top = 7
-      Caption = 'Diret'#243'rio local'
-      ParentColor = False
-      ParentFont = False
-      ParentShowHint = False
-      ShowHint = False
-      Style.Font.Charset = ANSI_CHARSET
-      Style.Font.Color = clNone
-      Style.Font.Height = -12
-      Style.Font.Name = 'Segoe UI'
-      Style.Font.Style = []
-      Style.TextColor = clMenuText
-      Style.IsFontAssigned = True
-      StyleDisabled.Color = clWindowText
-      Properties.Alignment.Horz = taCenter
-      Properties.Alignment.Vert = taVCenter
-      Properties.ShadowedColor = clInfoText
-      AnchorX = 45
-      AnchorY = 17
-    end
-    object cxLabel2: TcxLabel
-      Left = 577
-      Top = 7
-      Caption = 'Diret'#243'rio de atualiza'#231#227'o'
-      ParentColor = False
-      ParentFont = False
-      ParentShowHint = False
-      ShowHint = False
-      Style.Font.Charset = ANSI_CHARSET
-      Style.Font.Color = clNone
-      Style.Font.Height = -12
-      Style.Font.Name = 'Segoe UI'
-      Style.Font.Style = []
-      Style.TextColor = clMenuText
-      Style.IsFontAssigned = True
-      StyleDisabled.Color = clWindowText
-      Properties.Alignment.Horz = taCenter
-      Properties.Alignment.Vert = taVCenter
-      Properties.ShadowedColor = clInfoText
-      AnchorX = 641
-      AnchorY = 17
-    end
+  object btnGravar: TcxButton
+    Left = 335
+    Top = 75
+    Width = 75
+    Height = 25
+    Caption = 'Gravar'
+    TabOrder = 1
+    OnClick = btnGravarClick
   end
-  object dxBarManager1: TdxBarManager
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    CanCustomize = False
-    Categories.Strings = (
-      'Default')
-    Categories.ItemsVisibles = (
-      2)
-    Categories.Visibles = (
-      True)
-    ImageOptions.Images = ImagensRepositorio16x16.List
-    ImageOptions.LargeImages = ImagensRepositorio24x24.List
-    PopupMenuLinks = <>
-    UseSystemFont = True
-    Left = 18
-    Top = 396
-    DockControlHeights = (
-      0
-      0
-      53
-      0)
-    object dxbPrincipal: TdxBar
-      AllowClose = False
-      AllowCustomizing = False
-      AllowQuickCustomizing = False
-      Caption = 'Principal'
-      CaptionButtons = <>
-      DockedDockingStyle = dsTop
-      DockedLeft = 0
-      DockedTop = 0
-      DockingStyle = dsTop
-      FloatLeft = 510
-      FloatTop = 241
-      FloatClientWidth = 0
-      FloatClientHeight = 0
-      ItemLinks = <
-        item
-          Visible = True
-          ItemName = 'btnNovo'
-        end
-        item
-          Visible = True
-          ItemName = 'btnAbrir'
-        end
-        item
-          Visible = True
-          ItemName = 'btnAtualizarTabelaSistema'
-        end
-        item
-          Visible = True
-          ItemName = 'btnLocalizar'
-        end
-        item
-          Visible = True
-          ItemName = 'dxBarLargeButton1'
-        end>
-      NotDocking = [dsNone, dsLeft, dsTop, dsRight, dsBottom]
-      OneOnRow = True
-      Row = 0
-      ShowMark = False
-      UseOwnFont = False
-      UseRestSpace = True
-      Visible = True
-      WholeRow = False
-    end
-    object btnSair: TdxBarLargeButton
-      Caption = 'Sair'
-      Category = 0
-      Hint = 'Sair'
-      Visible = ivAlways
-      LargeImageIndex = 108
-      AutoGrayScale = False
-      SyncImageIndex = False
-      ImageIndex = 108
-    end
-    object btnNovo: TdxBarLargeButton
-      Caption = '&Listar'
-      Category = 0
-      Hint = 'Listar'
-      Visible = ivAlways
-      LargeImageIndex = 254
-      ShortCut = 32846
-      OnClick = btnNovoClick
-      AutoGrayScale = False
-      SyncImageIndex = False
-      ImageIndex = 245
-    end
-    object btnAbrir: TdxBarLargeButton
-      Caption = '&Atualizar'
-      Category = 0
-      Hint = 'Atualizar aplicativos selecionados'
-      Visible = ivAlways
-      LargeImageIndex = 84
-      ShortCut = 32837
-      OnClick = btnAbrirClick
-      AutoGrayScale = False
-      SyncImageIndex = False
-      ImageIndex = 88
-    end
-    object btnAtualizarTabelaSistema: TdxBarLargeButton
-      Caption = 'Alterar vers'#227'o'
-      Category = 0
-      Hint = 'Alterar Valor da '#250'ltima vers'#227'o utilizada'
-      Visible = ivAlways
-      LargeImageIndex = 194
-      ShortCut = 32856
-      OnClick = btnAtualizarTabelaSistemaClick
-      AutoGrayScale = False
-    end
-    object btnLocalizar: TdxBarLargeButton
-      Caption = 'Diret'#243'rio de atualiza'#231#227'o'
-      Category = 0
-      Hint = 'Selecionar diret'#243'rio de atualiza'#231#227'o'
-      Visible = ivAlways
-      LargeImageIndex = 468
-      ShortCut = 32844
-      OnClick = btnLocalizarClick
-      AutoGrayScale = False
-    end
-    object btnImprimir: TdxBarLargeButton
-      Caption = '&Imprimir'
-      Category = 0
-      Hint = 'Imprimir'
-      Visible = ivAlways
-      LargeImageIndex = 94
-      ShortCut = 32841
-      AutoGrayScale = False
-    end
-    object btnVisualizar: TdxBarLargeButton
-      Caption = '&Visualizar'
-      Category = 0
-      Hint = 'Visualizar'
-      Visible = ivAlways
-      LargeImageIndex = 113
-      ShortCut = 32854
-      AutoGrayScale = False
-      SyncImageIndex = False
-      ImageIndex = 108
-    end
-    object btnNovidadesHelp: TdxBarLargeButton
-      Caption = 'Ajuda'
-      Category = 0
-      HelpContext = 10
-      Hint = 'Ajuda'
-      Visible = ivNever
-      LargeImageIndex = 75
-      AutoGrayScale = False
-    end
-    object btnAjuda: TdxBarLargeButton
-      Caption = 'A&juda'
-      Category = 0
-      Hint = 'Ajuda'
-      Visible = ivAlways
-      LargeImageIndex = 75
-      SyncImageIndex = False
-      ImageIndex = 75
-    end
-    object dxBarButton1: TdxBarButton
-      Caption = 'Diret'#243'rio Local'
-      Category = 0
-      Hint = 'Diret'#243'rio Local'
-      Visible = ivAlways
-    end
-    object dxBarButton2: TdxBarButton
-      Caption = 'New Button'
-      Category = 0
-      Hint = 'New Button'
-      Visible = ivAlways
-    end
-    object dxBarLargeButton1: TdxBarLargeButton
-      Caption = 'Diret'#243'rio local'
-      Category = 0
-      Hint = 'Diret'#243'rio Local'
-      Visible = ivAlways
-      LargeImageIndex = 677
-      OnClick = dxBarLargeButton1Click
-      AutoGrayScale = False
-    end
-    object dxBarButton3: TdxBarButton
-      Caption = 'New Button'
-      Category = 0
-      Hint = 'New Button'
-      Visible = ivAlways
-    end
-    object cxBarEditItem1: TcxBarEditItem
-      Align = iaCenter
-      Caption = 'Legenda'
-      Category = 0
-      Hint = 'Legenda'
-      Style = dtmConnection.FonteConsolas
-      Visible = ivAlways
-      PropertiesClassName = 'TcxLabelProperties'
-      BarStyleDropDownButton = False
-    end
+  object OpenDialog2: TOpenDialog
+    Left = 59
+    Top = 70
   end
-  object dspVersao: TDataSetProvider
-    DataSet = qrySistema
-    Left = 44
-    Top = 109
-  end
-  object cdsVersao: TClientDataSet
-    Aggregates = <>
-    IndexFieldNames = 'nmArquivo'
-    Params = <>
-    ProviderName = 'dspVersao'
-    Left = 74
-    Top = 109
-    object cdsVersaonmarquivo: TStringField
-      DisplayLabel = 'Nome do arquivo'
-      DisplayWidth = 50
-      FieldName = 'nmarquivo'
-      Origin = 'nmarquivo'
-      Size = 100
-    end
-    object cdsVersaoNrUltimaVersao: TStringField
-      Alignment = taCenter
-      DisplayLabel = 'Ultima Vers'#227'o'
-      DisplayWidth = 20
-      FieldName = 'NrUltimaVersao'
-      Origin = 'NrUltimaVersao'
-      FixedChar = True
-      Size = 50
-    end
-    object cdsVersaoArquivoVersao: TStringField
-      Alignment = taCenter
-      DisplayLabel = 'Vers'#227'o do Arquivo'
-      DisplayWidth = 20
-      FieldKind = fkInternalCalc
-      FieldName = 'ArquivoVersao'
-      Size = 50
-    end
-    object cdsVersaoversaoDisponivel: TStringField
-      Alignment = taCenter
-      DisplayLabel = 'Vers'#227'o Dispon'#237'vel'
-      DisplayWidth = 25
-      FieldKind = fkInternalCalc
-      FieldName = 'versaoDisponivel'
-    end
-    object cdsVersaoStAtualizado: TStringField
-      Alignment = taCenter
-      DisplayLabel = 'Atualizado'
-      DisplayWidth = 15
-      FieldKind = fkInternalCalc
-      FieldName = 'StAtualizado'
-      Size = 1
-    end
-    object cdsVersaoSelecionar: TBooleanField
-      FieldKind = fkInternalCalc
-      FieldName = 'Selecionar'
-    end
-  end
-  object qrySistema: TUniQuery
+  object UniQuery1: TUniQuery
     Connection = dtmConnection.mscConnectionERP
-    SQL.Strings = (
-      'Select nmSistema, nmArquivo, nrUltimaVersao from Sistema')
-    Left = 13
-    Top = 107
+    Left = 108
+    Top = 69
   end
   object qryConfiguracao: TUniQuery
+    Connection = dtmConnection.mscConnectionERP
     SQL.Strings = (
       
         'Select vlConfiguracao from Configuracao where nmSecao = '#39'DataBas' +
         'e'#39' and nmConfiguracao = '#39'DiretorioAtualizacao'#39)
-    Left = 47
-    Top = 137
+    Left = 69
+    Top = 157
   end
-  object dsVersao: TUniDataSource
-    DataSet = cdsVersao
-    Left = 13
-    Top = 138
+  object qryConfiguracao1: TUniQuery
+    Connection = dtmConnection.mscConnectionERP
+    SQL.Strings = (
+      
+        'Select vlConfiguracao from Configuracao where nmSecao = '#39'DataBas' +
+        'e'#39' and nmConfiguracao = '#39'DiretorioAtualizacao'#39)
+    Left = 195
+    Top = 68
   end
-  object OpenDialog1: TOpenPictureDialog
-    Left = 77
-    Top = 137
+  object qryUltimoCodigo: TUniQuery
+    Connection = dtmConnection.mscConnectionERP
+    SQL.Strings = (
+      
+        'Select vlConfiguracao from Configuracao where nmSecao = '#39'DataBas' +
+        'e'#39' and nmConfiguracao = '#39'DiretorioAtualizacao'#39)
+    Left = 245
+    Top = 69
+  end
+  object UniStoredProc1: TUniStoredProc
+    Connection = dtmConnection.mscConnectionERP
+    Left = 284
+    Top = 71
+  end
+  object OpenDialog1: TcxShellBrowserDialog
+    Left = 413
+    Top = 70
+  end
+  object UniSQLMonitor1: TUniSQLMonitor
+    Left = 163
+    Top = 69
   end
 end

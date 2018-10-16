@@ -11,10 +11,13 @@ uses
   cxEdit, cxNavigator, DB, cxDBData, dxSkinsdxBarPainter, dxBar, cxClasses,
   cxGridLevel, cxGridCustomView, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxGrid,cxImage,
-  cxBarEditItem, DBClient, Provider, MemDS, DBAccess, Uni, StdCtrls;
+  cxBarEditItem, DBClient, Provider, MemDS, DBAccess, Uni, StdCtrls,
+  ExtCtrls, AltPanel, cxLabel, cxContainer, cxTextEdit, abcfdir,AltFStatus,
+  cxShellBrowserDialog, dxPSGlbl, dxPSUtl, dxPrnPg, dxBkgnd, dxWrap,
+  dxPgsDlg, AltLibDialog, ExtDlgs, FileCtrl,ComCtrls;
 
 type
-  TForm1 = class(TForm)
+  TfrmAtualizadorDeVersoes = class(TForm)
     cxGrid1DBTableView1: TcxGridDBTableView;
     cxGrid1Level1: TcxGridLevel;
     cxGrid1: TcxGrid;
@@ -23,7 +26,7 @@ type
     btnSair: TdxBarLargeButton;
     btnNovo: TdxBarLargeButton;
     btnAbrir: TdxBarLargeButton;
-    btnExcluir: TdxBarLargeButton;
+    btnAtualizarTabelaSistema: TdxBarLargeButton;
     btnLocalizar: TdxBarLargeButton;
     btnImprimir: TdxBarLargeButton;
     btnVisualizar: TdxBarLargeButton;
@@ -38,7 +41,6 @@ type
     cdsVersaoStAtualizado: TStringField;
     cdsVersaoSelecionar: TBooleanField;
     qrySistema: TUniQuery;
-    edtDiretorio: TEdit;
     qryConfiguracao: TUniQuery;
     cxGrid1DBTableView1nmarquivo: TcxGridDBColumn;
     cxGrid1DBTableView1NrUltimaVersao: TcxGridDBColumn;
@@ -47,101 +49,126 @@ type
     cxGrid1DBTableView1StAtualizado: TcxGridDBColumn;
     cxGrid1DBTableView1Selecionar: TcxGridDBColumn;
     dsVersao: TUniDataSource;
+    dxBarButton1: TdxBarButton;
+    dxBarButton2: TdxBarButton;
+    dxBarLargeButton1: TdxBarLargeButton;
+    dxBarButton3: TdxBarButton;
+    cxBarEditItem1: TcxBarEditItem;
+    edtDiretorio: TcxTextEdit;
+    ckMarcarTodos: TCheckBox;
+    lbMarcar: TcxLabel;
+    Panel1: TPanel;
+    cxLabel1: TcxLabel;
+    cxLabel2: TcxLabel;
+    edtDiretorioAtualizacao: TcxTextEdit;
+    OpenDialog1: TOpenPictureDialog;
+    Panel2: TPanel;
     procedure FormCreate(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure btnAbrirClick(Sender: TObject);
-    procedure btnExcluirClick(Sender: TObject);
+    procedure btnAtualizarTabelaSistemaClick(Sender: TObject);
     procedure btnLocalizarClick(Sender: TObject);
+    procedure dxBarLargeButton1Click(Sender: TObject);
+    procedure cxGrid1DBTableView1DblClick(Sender: TObject);
+    procedure ckMarcarTodosClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
-    Connection: TdtmConnection;
-    qtAtualizados,
-    qtDesatualizados: Integer;
-    procedure preencherGridVersaoArquivo;
+    FqtAtualizados,
+    FqtDesatualizados: Integer;
+    procedure PreencherGridVersaoArquivo;
     procedure ListarArquivos(Diretorio: string; Sub: Boolean;
       Lista: TStringList);
     function TemAtributo(Attr, Val: Integer): Boolean;
     function VersaoExe(arquivo: string): String;
-    function RetornaDiretorioAtualizacao: string;
     procedure PreencherVersaoDoArquivo(nomeAplicativo: string;
       lista: Tstringlist; coluna: TStringField);
     function VersaoComMascara(versao: string): string;
+    procedure AbrirFrmSelecionaDiretorio;
+    procedure AtualizarSelecionados;
+    procedure AtualizarAplicativo(ArquivoOrigem, ArquivoDestino: string);
+    procedure AlterarTodos(value: Boolean);
+    procedure AtualizarNrUltimaVersao;
+    procedure MontarScriptAtualizarUltimaVersao(pAplicativo, pVersao: String);
 
     { Private declarations }
   public
     FCadastroUsuariosSQL: TUsuariosErp;
     FLogin: Boolean;
+    function RetornarDiretorioAtualizacao: string;
     { Public declarations }
   end;
 
 var
-  Form1: TForm1;
+  frmAtualizadorDeVersoes: TfrmAtualizadorDeVersoes;
 
 implementation
 
+uses selecionaDiretorioAtualizado;
+
 {$R *.dfm}
 
-procedure TForm1.FormCreate(Sender: TObject);
+procedure TfrmAtualizadorDeVersoes.FormCreate(Sender: TObject);
 begin
   dtmConnection.mscConnectionERP.LoginPrompt:= False;
   FCadastroUsuariosSQL:= TUsuariosERP.create();
   FCadastroUsuariosSQL.Connection:= dtmConnection.mscConnectionERP;
-
   FLogin := false;
 
-  if (FCadastroUsuariosSQL.ShowLogin(ttlTerminar, cEstCompras, GetVersaoSistema(cEstCompras))) then
+  if (FCadastroUsuariosSQL.ShowLogin(ttlTerminar, '', '')) then
   begin
     FLogin := true;
-
     dtmERP.ConnectERPServer(ttlTerminar);
     cdsVersao.Open();
-    inherited;
-    PreencherGridVersaoArquivo();
   end;
-
 end;
 
-procedure TForm1.btnNovoClick(Sender: TObject);
+procedure TfrmAtualizadorDeVersoes.btnNovoClick(Sender: TObject);
 begin
-  //preencherGridVersaoArquivo();
+  PreencherGridVersaoArquivo();
 end;
 
-procedure TForm1.btnAbrirClick(Sender: TObject);
+procedure TfrmAtualizadorDeVersoes.btnAbrirClick(Sender: TObject);
 begin
-  (*dmConexao.FDQuery1.Connection:= dmConexao.conexaoSql;
-  dmConexao.FDQuery1.Close();
-  dmConexao.FDQuery1.open();
-  if dmConexao.FDQuery1.FieldByName('vlConfiguracao').text = '' then
+  qryConfiguracao.Connection:= dtmConnection.mscConnectionERP;
+  qryConfiguracao.Close();
+  qryConfiguracao.open();
+  if qryConfiguracao.FieldByName('vlConfiguracao').text = '' then
     begin
       ShowMessage('O diretório de atualização não foi informado, informe o diretório a ser utilizado '+
         'para extrair os arquivos de atualização');
       AbrirFrmSelecionaDiretorio();
     end;
-  atualizarSelecionados();*)
+  AtualizarSelecionados();
+  PreencherGridVersaoArquivo();
 end;
 
-procedure TForm1.btnExcluirClick(Sender: TObject);
+procedure TfrmAtualizadorDeVersoes.btnAtualizarTabelaSistemaClick(Sender: TObject);
 begin
-  //AtualizarNrUltimaVersao();
+  AtualizarNrUltimaVersao();
+  PreencherGridVersaoArquivo();
 end;
 
-procedure TForm1.btnLocalizarClick(Sender: TObject);
+procedure TfrmAtualizadorDeVersoes.btnLocalizarClick(Sender: TObject);
 begin
-  //abrirFrmSelecionaDiretorio();
+  abrirFrmSelecionaDiretorio();
+  edtDiretorioAtualizacao.text:= RetornarDiretorioAtualizacao();
+  PreencherGridVersaoArquivo();
 end;
 
-procedure TForm1.preencherGridVersaoArquivo();
+procedure TfrmAtualizadorDeVersoes.PreencherGridVersaoArquivo();
 var
   listaVersaoArquivo, listaVersaoDisponivel: TStringList;
   arquivo,nrVersaoSistema,nrVersaoArquivo: string;
   Coluna: TStringField;
 begin
-  qtAtualizados:= 0;
-  qtDesatualizados:= 0;
+  FqtAtualizados:= 0;
+  FqtDesatualizados:= 0;
+  ckMarcarTodos.Checked:= False;
   cxGrid1DBTableView1.DataController.datasource.DataSet.DisableControls();
   listaVersaoArquivo:= TStringList.Create();
   listaVersaoDisponivel:= TStringList.Create();
   ListarArquivos(edtDiretorio.Text,false,listaVersaoArquivo);
-  ListarArquivos(RetornaDiretorioAtualizacao(),false,listaVersaoDisponivel);
+  ListarArquivos(RetornarDiretorioAtualizacao(),false,listaVersaoDisponivel);
   cdsVersao.Refresh();
   cdsVersao.First();
   try
@@ -155,7 +182,6 @@ begin
         PreencherVersaoDoArquivo(arquivo,listaVersaoDisponivel,coluna);
         nrVersaoSistema:= cdsVersaoNrUltimaVersao.AsString;
         nrVersaoArquivo:= cdsVersaoArquivoVersao.AsString;
-        //preencherLabelQtAtualizada(nrVersaoSistema,nrVersaoArquivo);
         cdsVersao.Post();
         cdsVersao.Next;
       end;
@@ -167,7 +193,7 @@ begin
   end;
 end;
 
-procedure TForm1.ListarArquivos(Diretorio: string; Sub:Boolean;Lista: TStringList);
+procedure TfrmAtualizadorDeVersoes.ListarArquivos(Diretorio: string; Sub:Boolean;Lista: TStringList);
 var
   F: TSearchRec;
   Ret: Integer;
@@ -198,12 +224,12 @@ begin
   end;
 end;
 
-function TForm1.TemAtributo(Attr, Val: Integer): Boolean;
+function TfrmAtualizadorDeVersoes.TemAtributo(Attr, Val: Integer): Boolean;
 begin
   Result := Attr and Val = Val;
 end;
 
-function TForm1.VersaoExe(arquivo: string): String;
+function TfrmAtualizadorDeVersoes.VersaoExe(arquivo: string): String;
 type
   PFFI = ^vs_FixedFileInfo;
 var
@@ -240,7 +266,7 @@ begin
   StrDispose(Parquivo);
 end;
 
-function TForm1.RetornaDiretorioAtualizacao(): string;
+function TfrmAtualizadorDeVersoes.RetornarDiretorioAtualizacao(): string;
 begin
   qryConfiguracao.Connection:= dtmConnection.mscConnectionERP;
   qryConfiguracao.Close();
@@ -248,7 +274,7 @@ begin
   result:= qryConfiguracao.FieldByName('vlConfiguracao').text;
 end;
 
-procedure TForm1.PreencherVersaoDoArquivo(nomeAplicativo: string; lista: Tstringlist; coluna: TStringField);
+procedure TfrmAtualizadorDeVersoes.PreencherVersaoDoArquivo(nomeAplicativo: string; lista: Tstringlist; coluna: TStringField);
 var
   horizontal: TStringList;
   i:Integer;
@@ -269,7 +295,7 @@ begin
   end;
 end;
 
-function TForm1.VersaoComMascara(versao: string): string;
+function TfrmAtualizadorDeVersoes.VersaoComMascara(versao: string): string;
 var
   lista: TStringList;
   a,b,c,d: string;
@@ -293,6 +319,157 @@ begin
       result:= '-';
   finally
     lista.Free;
+  end;
+end;
+
+procedure TfrmAtualizadorDeVersoes.AbrirFrmSelecionaDiretorio();
+begin
+  try
+    frmDiretorio:= tfrmDiretorio.Create(self);
+    frmdiretorio.ShowModal();
+  finally
+    frmDiretorio.Free;
+    PreencherGridVersaoArquivo();
+  end;
+end;
+
+procedure TfrmAtualizadorDeVersoes.dxBarLargeButton1Click(Sender: TObject);
+var
+  lDiretorio: string;
+begin
+  if SelectDirectory(lDiretorio, [sdAllowCreate, sdPerformCreate, sdPrompt], 0) then
+  begin
+    FocaControle(edtDiretorio);
+    edtDiretorio.Text := lDiretorio;
+    PreencherGridVersaoArquivo();
+  end;
+end;
+
+procedure TfrmAtualizadorDeVersoes.AtualizarSelecionados();
+var
+  ArquivoOrigem,ArquivoDestino,diretorioDestino: string;
+  lStatus : TStatus;
+begin;
+  diretorioDestino:= edtDiretorio.Text;
+  lStatus := TStatus.create();
+  cdsVersao.disableControls;
+  cdsVersao.First;
+  try
+    lStatus := TStatus.Animate(Screen.ActiveForm, 'Aguarde, atualizando os aplicativos selecionados... ', aviCopyFile);
+    while not cdsVersao.eof do
+      begin
+        if (cdsVersaoSelecionar.AsBoolean) and (cdsVersaoversaoDisponivel.AsString <> '') then
+          begin
+            lStatus.Text:= 'Aguarde, atualizando os aplicativos selecionados...  ' + #13 + #13 + cdsVersaonmarquivo.AsString;
+            ArquivoOrigem:= RetornarDiretorioAtualizacao() + '\' + cdsVersaonmarquivo.AsString;
+            ArquivoDestino:= diretorioDestino + '\' + cdsVersaonmarquivo.AsString;
+            AtualizarAplicativo(ArquivoOrigem,ArquivoDestino);
+          end;
+        cdsVersao.Next;
+      end;
+  finally
+    cdsVersao.First;
+    cdsVersao.enableControls;
+    lStatus.Free();
+  end;
+end;
+
+procedure TfrmAtualizadorDeVersoes.AtualizarAplicativo(ArquivoOrigem, ArquivoDestino: string);
+begin
+  if (cdsVersaoversaoDisponivel.AsString > cdsVersaoArquivoVersao.AsString) then
+    CopyFile(pchar(ArquivoOrigem),pchar(ArquivoDestino),False);
+end;
+
+procedure TfrmAtualizadorDeVersoes.cxGrid1DBTableView1DblClick(
+  Sender: TObject);
+begin
+  cdsVersao.Edit();
+  cdsVersaoSelecionar.AsBoolean:= not (cdsVersaoSelecionar.AsBoolean);
+  cdsVersao.Post();
+end;
+
+procedure TfrmAtualizadorDeVersoes.ckMarcarTodosClick(Sender: TObject);
+begin
+  if ckMarcarTodos.Checked then
+    begin
+      AlterarTodos(true);
+      lbMarcar.Caption:= 'Desmarcar Todos';
+    end
+  else
+    begin
+      AlterarTodos(false);
+      lbMarcar.Caption:= 'Marcar Todos';
+    end;
+end;
+
+procedure TfrmAtualizadorDeVersoes.AlterarTodos(value: Boolean);
+begin
+  cdsVersao.disableControls;
+  cdsVersao.First();
+  while not cdsVersao.eof do
+    begin
+      cdsVersao.Edit();
+      if cdsVersaoversaoDisponivel.AsString <> '' then
+        cdsVersaoSelecionar.AsBoolean := value; // true marca, false desmarca
+      cdsVersao.Post();
+      cdsVersao.Next();
+    end;
+  cdsVersao.First();
+  cdsVersao.enableControls;
+end;
+
+procedure TfrmAtualizadorDeVersoes.AtualizarNrUltimaVersao();
+var
+  lista,Coluna: TStringList;
+  i: Integer;
+begin
+  lista:= TStringList.Create();
+  try
+    ListarArquivos(RetornarDiretorioAtualizacao(),false,lista);
+    for I := 0 to lista.Count - 1 do
+      begin
+        coluna:= TStringList.Create();
+        Coluna.Delimiter:= '|';
+        try
+          Coluna.DelimitedText:= lista.Strings[i];
+          MontarScriptAtualizarUltimaVersao(Coluna.Strings[0],Coluna.Strings[1]);
+        finally
+          Coluna.Free();
+        end;
+      end;
+  finally
+    lista.Free();
+  end;
+end;
+
+procedure TfrmAtualizadorDeVersoes.FormShow(Sender: TObject);
+begin
+  edtDiretorioAtualizacao.Text:= RetornarDiretorioAtualizacao();
+  edtDiretorio.Text:= 'C:\Program Files (x86)\Alterdata\ERP';
+  PreencherGridVersaoArquivo();
+end;
+
+procedure TfrmAtualizadorDeVersoes.MontarScriptAtualizarUltimaVersao(pAplicativo, pVersao: String);
+var
+  qryAtualizaNrUltimaVersao: TUniQuery;
+begin
+  qryAtualizaNrUltimaVersao:= TUniQuery.Create(nil);
+  qryAtualizaNrUltimaVersao.Connection:= dtmConnection.mscConnectionERP;
+
+  try
+    qryAtualizaNrUltimaVersao.SQL.Text := ('Update sistema set '+
+                                'nrUltimaVersao = :nrUltimaVersao where '+
+                                'nmArquivo = :nmArquivo');
+    qryAtualizaNrUltimaVersao.ParamByName('nmArquivo').AsString := pAplicativo;
+    qryAtualizaNrUltimaVersao.ParamByName('nrUltimaVersao').AsString := versaocomMascara(pVersao);
+    try
+      qryAtualizaNrUltimaVersao.ExecSQL;
+    except on e: Exception do
+      ShowMessage('Não foi possível alterar o registro : '+ #13
+                  + e.Message);
+    end;
+  finally
+    qryAtualizaNrUltimaVersao.Free();
   end;
 end;
 end.
