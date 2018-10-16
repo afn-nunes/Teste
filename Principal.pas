@@ -73,8 +73,6 @@ type
     procedure ckMarcarTodosClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
-    FqtAtualizados,
-    FqtDesatualizados: Integer;
     procedure PreencherGridVersaoArquivo;
     procedure ListarArquivos(Diretorio: string; Sub: Boolean;
       Lista: TStringList);
@@ -114,7 +112,7 @@ begin
   FCadastroUsuariosSQL.Connection:= dtmConnection.mscConnectionERP;
   FLogin := false;
 
-  if (FCadastroUsuariosSQL.ShowLogin(ttlTerminar, '', '')) then
+  if (FCadastroUsuariosSQL.ShowLogin(ttlTerminar,'','7.00.00.00')) then
   begin
     FLogin := true;
     dtmERP.ConnectERPServer(ttlTerminar);
@@ -161,14 +159,12 @@ var
   arquivo,nrVersaoSistema,nrVersaoArquivo: string;
   Coluna: TStringField;
 begin
-  FqtAtualizados:= 0;
-  FqtDesatualizados:= 0;
   ckMarcarTodos.Checked:= False;
-  cxGrid1DBTableView1.DataController.datasource.DataSet.DisableControls();
+  cdsVersao.DisableControls();
   listaVersaoArquivo:= TStringList.Create();
   listaVersaoDisponivel:= TStringList.Create();
   ListarArquivos(edtDiretorio.Text,false,listaVersaoArquivo);
-  ListarArquivos(RetornarDiretorioAtualizacao(),false,listaVersaoDisponivel);
+  ListarArquivos(edtDiretorioAtualizacao.Text,false,listaVersaoDisponivel);
   cdsVersao.Refresh();
   cdsVersao.First();
   try
@@ -189,7 +185,7 @@ begin
     listaVersaoArquivo.Free();
     listaVersaoDisponivel.Free;
     cdsVersao.First();
-    cxGrid1DBTableView1.DataController.datasource.DataSet.EnableControls();
+    cdsVersao.EnableControls();
   end;
 end;
 
@@ -271,7 +267,7 @@ begin
   qryConfiguracao.Connection:= dtmConnection.mscConnectionERP;
   qryConfiguracao.Close();
   qryConfiguracao.open();
-  result:= qryConfiguracao.FieldByName('vlConfiguracao').text;
+  result:= qryConfiguracao.Fields[0].AsString;
 end;
 
 procedure TfrmAtualizadorDeVersoes.PreencherVersaoDoArquivo(nomeAplicativo: string; lista: Tstringlist; coluna: TStringField);
@@ -352,7 +348,7 @@ var
 begin;
   diretorioDestino:= edtDiretorio.Text;
   lStatus := TStatus.create();
-  cdsVersao.disableControls;
+  cdsVersao.DisableControls;
   cdsVersao.First;
   try
     lStatus := TStatus.Animate(Screen.ActiveForm, 'Aguarde, atualizando os aplicativos selecionados... ', aviCopyFile);
@@ -361,7 +357,7 @@ begin;
         if (cdsVersaoSelecionar.AsBoolean) and (cdsVersaoversaoDisponivel.AsString <> '') then
           begin
             lStatus.Text:= 'Aguarde, atualizando os aplicativos selecionados...  ' + #13 + #13 + cdsVersaonmarquivo.AsString;
-            ArquivoOrigem:= RetornarDiretorioAtualizacao() + '\' + cdsVersaonmarquivo.AsString;
+            ArquivoOrigem:= edtDiretorioAtualizacao.Text + '\' + cdsVersaonmarquivo.AsString;
             ArquivoDestino:= diretorioDestino + '\' + cdsVersaonmarquivo.AsString;
             AtualizarAplicativo(ArquivoOrigem,ArquivoDestino);
           end;
@@ -404,7 +400,7 @@ end;
 
 procedure TfrmAtualizadorDeVersoes.AlterarTodos(value: Boolean);
 begin
-  cdsVersao.disableControls;
+  cdsVersao.DisableControls;
   cdsVersao.First();
   while not cdsVersao.eof do
     begin
@@ -425,7 +421,7 @@ var
 begin
   lista:= TStringList.Create();
   try
-    ListarArquivos(RetornarDiretorioAtualizacao(),false,lista);
+    ListarArquivos(edtDiretorioAtualizacao.text,false,lista);
     for I := 0 to lista.Count - 1 do
       begin
         coluna:= TStringList.Create();
